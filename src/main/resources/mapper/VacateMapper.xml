@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="guet.sgc.sv.dao.VacateMapper" >
+  <resultMap id="BaseResultMap" type="guet.sgc.sv.entity.Vacate" >
+    <id column="leave_id" property="leaveId" jdbcType="BIGINT" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="leave_time" property="leaveTime" jdbcType="DATE" />
+    <result column="leave_reason" property="leaveReason" jdbcType="VARCHAR" />
+    <result column="leave_file" property="leaveFile" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="leave_status" property="leaveStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    leave_id, student_id, student_name, leave_time, leave_reason, leave_file, submit_time, 
+    leave_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="guet.sgc.sv.entity.VacateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vacate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from vacate
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from vacate
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="guet.sgc.sv.entity.VacateExample" >
+    delete from vacate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="guet.sgc.sv.entity.Vacate" >
+    insert into vacate (leave_id, student_id, student_name, 
+      leave_time, leave_reason, leave_file, 
+      submit_time, leave_status)
+    values (#{leaveId,jdbcType=BIGINT}, #{studentId,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
+      #{leaveTime,jdbcType=DATE}, #{leaveReason,jdbcType=VARCHAR}, #{leaveFile,jdbcType=VARCHAR}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{leaveStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="guet.sgc.sv.entity.Vacate" >
+    insert into vacate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="leaveId != null" >
+        leave_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="leaveTime != null" >
+        leave_time,
+      </if>
+      <if test="leaveReason != null" >
+        leave_reason,
+      </if>
+      <if test="leaveFile != null" >
+        leave_file,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="leaveStatus != null" >
+        leave_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="leaveId != null" >
+        #{leaveId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        #{leaveTime,jdbcType=DATE},
+      </if>
+      <if test="leaveReason != null" >
+        #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveFile != null" >
+        #{leaveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveStatus != null" >
+        #{leaveStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="guet.sgc.sv.entity.VacateExample" resultType="java.lang.Integer" >
+    select count(*) from vacate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vacate
+    <set >
+      <if test="record.leaveId != null" >
+        leave_id = #{record.leaveId,jdbcType=BIGINT},
+      </if>
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentName != null" >
+        student_name = #{record.studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveTime != null" >
+        leave_time = #{record.leaveTime,jdbcType=DATE},
+      </if>
+      <if test="record.leaveReason != null" >
+        leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveFile != null" >
+        leave_file = #{record.leaveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null" >
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveStatus != null" >
+        leave_status = #{record.leaveStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vacate
+    set leave_id = #{record.leaveId,jdbcType=BIGINT},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      student_name = #{record.studentName,jdbcType=VARCHAR},
+      leave_time = #{record.leaveTime,jdbcType=DATE},
+      leave_reason = #{record.leaveReason,jdbcType=VARCHAR},
+      leave_file = #{record.leaveFile,jdbcType=VARCHAR},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      leave_status = #{record.leaveStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="guet.sgc.sv.entity.Vacate" >
+    update vacate
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null" >
+        leave_time = #{leaveTime,jdbcType=DATE},
+      </if>
+      <if test="leaveReason != null" >
+        leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveFile != null" >
+        leave_file = #{leaveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveStatus != null" >
+        leave_status = #{leaveStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="guet.sgc.sv.entity.Vacate" >
+    update vacate
+    set student_id = #{studentId,jdbcType=VARCHAR},
+      student_name = #{studentName,jdbcType=VARCHAR},
+      leave_time = #{leaveTime,jdbcType=DATE},
+      leave_reason = #{leaveReason,jdbcType=VARCHAR},
+      leave_file = #{leaveFile,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      leave_status = #{leaveStatus,jdbcType=INTEGER}
+    where leave_id = #{leaveId,jdbcType=BIGINT}
+  </update>
+</mapper>
