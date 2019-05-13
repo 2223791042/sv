@@ -47,8 +47,14 @@
         <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delBatch"><i class="layui-icon">&#xe640;</i> 批量拒绝</button>
     </div>
 </script>
+<script type="text/html" id="leaveFile">
+    {{# if(d.leaveFile == null){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon">&#xe60b;</i> 没有材料</button>
+    {{# } else{ }}
+    <a href="{{d.leaveFile}}" target="_blank" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe60b;</i>点击查看</a>
+    {{# } }}
+</script>
 <table class="layui-hide" id="test" lay-filter="test"></table>
-
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="look"><i class="layui-icon">&#xe6b2;</i> 查看</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del"><i class="layui-icon">&#xe640;</i> 拒绝</a>
@@ -120,6 +126,7 @@
                     ,{field:'leaveReason', title:'请假原因'}
                     ,{field:'leaveTime', title:'请假日期',templet:'<div>{{ Format(d.leaveTime,"yyyy-MM-dd")}}</div>'}
                     ,{field:'submitTime', title:'提交日期'}
+                    ,{field: 'leaveFile', title: '请假材料', templet: '#leaveFile'}
                     ,{field: 'operate', title: '操作',toolbar:'#barDemo'}
                 ]
             ]

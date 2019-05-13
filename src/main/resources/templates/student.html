@@ -29,6 +29,13 @@
     <button class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon">&#xe69c;</i> 退回</button>
     {{# } }}
 </script>
+<script type="text/html" id="leaveFile">
+    {{# if(d.leaveFile == null){ }}
+    <button class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon">&#xe60b;</i> 没有材料</button>
+    {{# } else{ }}
+    <a href="{{d.leaveFile}}" target="_blank" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe60b;</i>点击查看</a>
+    {{# } }}
+</script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="refresh"><i class="layui-icon">&#xe669;</i>刷新列表</button>
@@ -80,6 +87,7 @@
                     , {field: 'leaveReason', title: '请假原因'}
                     , {field: 'leaveTime', title: '请假日期', templet: '<div>{{ Format(d.leaveTime,"yyyy-MM-dd")}}</div>'}
                     , {field: 'submitTime', title: '提交日期'}
+                    , {field: 'leaveFile', title: '请假材料', templet: '#leaveFile'}
                     , {field: 'leaveStatus', title: '状态', templet: '#leaveStatus'}
                 ]
             ]
