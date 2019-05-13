@@ -48,6 +48,7 @@ public class VacateServiceImpl implements VacateService {
     @Override
     public List<Vacate> getVacateList(String username, Date startTime, Date endTime) {
         VacateExample example = new VacateExample();
+        example.setOrderByClause("submit_time desc");
         VacateExample.Criteria criteria = example.createCriteria();
         criteria.andStudentIdLike(username + "%");
         criteria.andLeaveStatusEqualTo(0);
@@ -82,6 +83,7 @@ public class VacateServiceImpl implements VacateService {
     @Override
     public List<Vacate> getVacateList(String classId, String studentId, Date startTime, Date endTime) {
         VacateExample example = new VacateExample();
+        example.setOrderByClause("submit_time desc");
         VacateExample.Criteria criteria = example.createCriteria();
         criteria.andLeaveStatusEqualTo(0);
         if (studentId != null && !studentId.trim().equals("")){
@@ -138,6 +140,7 @@ public class VacateServiceImpl implements VacateService {
     @Override
     public List<Vacate> getVacateList(String username) {
         VacateExample example = new VacateExample();
+        example.setOrderByClause("submit_time desc");
         VacateExample.Criteria criteria = example.createCriteria();
         criteria.andStudentIdEqualTo(username);
         return vacateMapper.selectByExample(example);
